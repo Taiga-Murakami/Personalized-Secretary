@@ -9,6 +9,7 @@ This system seamlessly handles everything from automatically collecting and deli
 - **Context-Aware Conversations (Pull)**: Reply to the delivered news via Slack threads to dive deeper into the topics. The AI perfectly remembers the context of the thread.
 - **Beautiful Slack UI**: Automatically converts standard Markdown into Slack's native rich UI (Block Kit) for highly readable reports.
 - **Dynamic Channel Personas**: Switches the AI's persona (e.g., Economics Research Assistant, Business Consultant) dynamically based on the Slack channel.
+- **Google Calendar Integration**: Connects with Google Calendar to automatically fetch upcoming schedules from both your main and AI-dedicated accounts, and supports seamless event creation directly from Slack using Gemini's Function Calling.
 
 ## 🏗️ System Architecture
 
@@ -80,6 +81,20 @@ You can deploy different AI personas to different Slack channels.
 If you want to change the tone of the morning report or adjust its layout, edit the ```sys_prompt``` inside ```report_generator.py```. The system uses Few-Shot prompting, so providing a clear output example in the prompt is highly recommended.
 
 **Note** that all comments and outputs are written in Japanese, so customize into your own language for easily understanding. 
+
+**4. Google Calendar Connection (Account A & Account B)**
+The system supports multi-account calendar aggregation using two distinct Google accounts for enhanced privacy and security:
+
+- **Account A (Main Account)**: Your personal or corporate primary Google account. The system only *reads* schedules from this account to display your upcoming events, ensuring your primary calendar remains safe from accidental modifications.
+- **Account B (AI Account)**: A dedicated Google account created specifically for this AI secretary system. The system has full permissions to both *read* schedules and *write* (create new events) on this account.
+
+**How to Setup:**
+1. **Generate Credentials**: Go to the Google Cloud Console using your **AI Account (Account B)**, enable the Google Calendar API, create OAuth 2.0 credentials, and download the `credentials.json` file.
+2. **Authorize the App**: Run the authentication flow locally to generate the `token.json` file. Place this `token.json` into your project root directory (ensure it is listed in `.gitignore`).
+3. **Share Calendar**: Open your **Main Account (Account A)** Google Calendar settings, and share your calendar with the AI Account's email address, granting at least "See all event details" permissions.
+4. **Configure Environment Variables**: Add your Main Account's email to your `settings/.env` file:
+   ```env
+   ACCOUNT_A_EMAIL=your-main-account-email@gmail.com
 
 ## 🔧 Technologies Used
 - Python 3.11
