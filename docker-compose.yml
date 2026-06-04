@@ -1,0 +1,10 @@
+version: '3.8' 
+
+services:
+  ai-secretary:
+    build: .
+    restart: ${DOCKER_RESTART_POLICY:-always}
+    volumes:
+      - ./:/app
+    env_file:
+      - settings/.env   # 👈 ここを .env から変更

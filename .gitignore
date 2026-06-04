@@ -1,0 +1,16 @@
+# Python関連
+*__pycache__/
+
+# 機密情報・環境変数
+settings/.env
+token.json
+credentials.json
+
+# プライベートな設定ファイル（プロンプト等）
+settings/contexts.json
+
+# パスが書かれたコマンドファイル
+switch_to_home.bat
+switch_to_main.bat
+
+*memo.txt

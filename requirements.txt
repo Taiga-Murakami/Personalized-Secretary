@@ -1,0 +1,12 @@
+slack_bolt
+slack_sdk
+google-genai
+notion-client
+python-dotenv
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+pytz
+apscheduler
+requests
+bs4
